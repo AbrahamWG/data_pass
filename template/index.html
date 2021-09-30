@@ -51,11 +51,11 @@
                                 <ol>
                                     <li>
                                         <input class='col-sm-5' type='text' name='ingredient1ProductName[ingredient-1]' placeholder='product name...'/>
-                                        <input class='col-sm-3' type='text' name='ingredient1ProductUnit[ingredient-2]' placeholder='product unit...'/>
-                                        <button type="button" class="edit-button-recipe col-sm-3 btn btn-secondary">Toggle Edit</button>
+                                        <input class='col-sm-3' type='text' name='ingredient1ProductUnit[ingredient-1]' placeholder='product unit...'/>
                                     </li>
                                     <div id='empty-recipe-row'></div>
-                                    <button  type="button" class="add-button-recipe d-block btn btn-primary">Add product</button>
+                                    <button type="button" class="add-button-recipe btn btn-primary">Add product</button>
+                                    <button type="button" class="edit-button-recipe col-sm-4 btn btn-secondary">Toggle Edit</button>
                                     <hr>
                                 </ol>
                             </td>
@@ -67,8 +67,9 @@
                     <tr>
                         <td colspan="2" class='text-center'>
                             <button id='add-button' type="button" class="btn btn-primary">Add row+</button>
-                            <button id='add-button' type="submit" class="btn btn-success">Calculate</button>
-
+                            <button id='dup-button' type="submit" class="btn btn-warning">Duplicate</button>
+                            <button id='cal-button' type="submit" class="btn btn-success">Calculate</button>
+                            
                         </td>
                     </tr>
                 </form>
