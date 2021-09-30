@@ -9,7 +9,7 @@ def index():
 @app.route('/', methods=['POST'])
 def get_value():
     print('listnya', request.form.getlist('ingredient[]'))
-    print('value pertamanya', request.form.getlist('ingredient[]')[0])
+    print('value pertamanya', request.form.getlist('ingredient[]'))
     return render_template('pass.html')
 
 if __name__ == "__main__":
