@@ -1,25 +1,18 @@
 const dataRows = document.getElementsByClassName('data-rows');
 const addButton = document.getElementById('add-button');
-const duplicate = document.getElementsByClassName('dup-button');
+const duplicate = document.getElementById('dup-button');
 
 let currentRows = 2;
-let currentRecipeRows = 1;
 
-function toggleInputDisabled(currentRecipeRows){
-  for(let i = 0; i<currentRecipeRows; i++){
-    var inputUnit = this.previousElementSibling.previousElementSibling.previousElementSibling.children[0];
-    var inputName = inputUnit.previousElementSibling;
-
-    if (inputUnit.disabled){
-      inputName.disabled = false;
-      inputUnit.disabled = false;
+function toggleInputDisabled(){
+  const parent = this.parentElement;
+  const allInputs = parent.querySelectorAll('input');
+  allInputs.forEach(input => {
+    if (input.disabled) {
+      input.disabled = false;
     }
-    else {
-     inputName.disabled = true;
-     inputUnit.disabled = true;
-    }
-  }
-  
+    else input.disabled =true;
+  })
 }
 
 
@@ -40,7 +33,7 @@ function addRecipeRow(){
   const editButtons = document.getElementsByClassName('edit-button-recipe');
   Array.from(editButtons).forEach(button => {
     button.onclick = toggleInputDisabled;
-  currentRecipeRows += 1;
+
   })
 
 
@@ -49,7 +42,7 @@ function addRecipeRow(){
 addButton.onclick = function(){ 
   const template = `
   <tr id='ingredient-${currentRows}'>    
-    <td>1</td>
+    <td>${currentRows}</td>
     <td>
         <input type='text' name='ingredient[]' placeholder='add an ingredient...'/>
     </td>
@@ -87,13 +80,45 @@ addButton.onclick = function(){
   Array.from(addButtonsRecipe).forEach(button => {
     button.onclick = addRecipeRow;
   })
-
 }
 
-duplicate.onclick = function{
-  //TODO
-}
 
+duplicate.onclick = function() {
+
+  //dapatkan tbody
+  const tbody = document.getElementsByTagName('tbody')[0];
+  //dapatkan children row table terakhir, -3 karena index
+  var childrenLength = tbody.children.length;
+  var template = tbody.children[childrenLength-3].outerHTML + '<tr id="empty-row"></tr>';
+  // id kolom NO last row, misal ke5, row-number-5, ubah jadi row-number-5 id nya
+  template = template.replace('row-number-' + (currentRows - 1), 'row-number-' + currentRows);
+  template = template.replace('ingredient-' + (currentRows - 1), 'ingredient-' + currentRows);
+  
+  const currentEmptyRow = document.getElementById('empty-row');
+  currentEmptyRow.outerHTML = template;
+  console.log('row-number-' + currentRows)
+  const currentRowNumber = document.getElementById('row-number-' + currentRows);
+  currentRowNumber.textContent = currentRows;
+  const editButtons = document.getElementsByClassName('edit-button-recipe');
+  Array.from(editButtons).forEach(button => {
+    button.onclick = toggleInputDisabled;
+  })
+  const addButtonsRecipe = document.getElementsByClassName('add-button-recipe');
+  Array.from(addButtonsRecipe).forEach(button => {
+    button.onclick = addRecipeRow;
+  })
+  //increment row
+  currentRows += 1; 
+  childrenLength = tbody.children.length;
+  const lastTr = tbody.children[childrenLength-3];
+  const secondLastTr = tbody.children[childrenLength-4];
+  console.log(lastTr, secondLastTr)
+  const allInputsLastTr = lastTr.querySelectorAll('input');
+  const allInputsSecondLastTr = secondLastTr.querySelectorAll('input');
+  for(var i = 0; i < allInputsLastTr.length; i+=1){
+    allInputsLastTr[i].value = allInputsSecondLastTr[i].value; 
+  }
+}
 const editButtons = document.getElementsByClassName('edit-button-recipe');
 Array.from(editButtons).forEach(button => {
   button.onclick = toggleInputDisabled;

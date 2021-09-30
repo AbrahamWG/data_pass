@@ -8,10 +8,9 @@ def index():
 
 @app.route('/', methods=['POST'])
 def get_value():
-    Ingredients = request.form['Ingredients']
-    Quantity = request.form['Quantity']
-    Price = request.form['Price']
-    return render_template('pass.html', i=Ingredients, q=Quantity, p=Price)
+    print('listnya', request.form.getlist('ingredient[]'))
+    print('value pertamanya', request.form.getlist('ingredient[]')[0])
+    return render_template('pass.html')
 
 if __name__ == "__main__":
     app.run()
