@@ -1,8 +1,9 @@
 const dataRows = document.getElementsByClassName('data-rows');
 const addButton = document.getElementById('add-button');
 const duplicate = document.getElementById('dup-button');
-
+const addProductToListButton = document.getElementById('add-product-to-list-button')
 let currentRows = 2;
+const productNames = [];
 
 function toggleInputDisabled(){
   const parent = this.parentElement;
@@ -23,8 +24,11 @@ function addRecipeRow(){
   const currentIngredientRow = this.parentElement.parentElement.parentElement.id;
   const template = `
   <li>
-    <input class='col-sm-5' type='text' name='ingredientProductName[${currentIngredientRow}]' placeholder='product name...'/>
+    <select name='ingredientProductName[${currentIngredientRow}]'>
+    </select>
     <input class='col-sm-3' type='text' name='ingredientProductUnit[${currentIngredientRow}]' placeholder='product unit...'/>
+    <button type='button' class='btn btn-danger btn-delete-product'>Delete</button>
+
   </li>
   <div id='empty-recipe-row'></div>
   `
@@ -36,7 +40,19 @@ function addRecipeRow(){
 
   })
 
+  const deleteProductButtons = document.getElementsByClassName('btn-delete-product');
+  Array.from(deleteProductButtons).forEach(button => {
+    button.onclick = deleteProductRow;
+  })
 
+  const myLi = this.previousElementSibling.previousElementSibling;
+  const mySelect = myLi.querySelector('select');
+  for(var i  =0 ; i<  productNames.length; i++){
+    const currentOption = document.createElement('option');
+    currentOption.value = productNames[i];
+    currentOption.textContent = productNames[i];
+    mySelect.appendChild(currentOption);
+  }
 }
 
 addButton.onclick = function(){ 
@@ -55,12 +71,16 @@ addButton.onclick = function(){
     <td>
         <ol>
             <li>
-                <input class='col-sm-5' type='text' name='ingredientProductName[]' placeholder='product name...'/>
-                <input class='col-sm-3' type='text' name='ingredientProductUnit[]' placeholder='product unit...'/>
+                <select name='ingredientProductName[ingredient-${currentRows}]'>
+                </select>
+                <input class='col-sm-3' type='text' name='ingredientProductUnit[ingredient-${currentRows}]' placeholder='product unit...'/>
+                <button type='button' class='btn btn-danger btn-delete-product'>Delete</button>
+
             </li>
             <div id='empty-recipe-row'></div>
             <button  type="button" class="add-button-recipe btn btn-primary">Add product</button>
             <button type="button" class="edit-button-recipe col-sm-4 btn btn-secondary">Toggle Edit</button>
+            <button type="button" class="delete-button-ingredient col-sm-4 btn btn-danger mt-2" style='width: 60%'>Delete Ingredient</button>
             <hr>
         </ol>
     </td>
@@ -80,6 +100,17 @@ addButton.onclick = function(){
   Array.from(addButtonsRecipe).forEach(button => {
     button.onclick = addRecipeRow;
   })
+
+  const deleteProductButtons = document.getElementsByClassName('btn-delete-product');
+  Array.from(deleteProductButtons).forEach(button => {
+    button.onclick = deleteProductRow;
+  })
+
+  const deleteIngredientButtons = document.getElementsByClassName('delete-button-ingredient');
+  Array.from(deleteIngredientButtons).forEach(button => {
+    button.onclick = deleteIngredientRow;
+  })
+
 }
 
 
@@ -107,6 +138,17 @@ duplicate.onclick = function() {
   Array.from(addButtonsRecipe).forEach(button => {
     button.onclick = addRecipeRow;
   })
+
+  const deleteProductButtons = document.getElementsByClassName('btn-delete-product');
+  Array.from(deleteProductButtons).forEach(button => {
+    button.onclick = deleteProductRow;
+  })
+  const deleteIngredientButtons = document.getElementsByClassName('delete-button-ingredient');
+  Array.from(deleteIngredientButtons).forEach(button => {
+    button.onclick = deleteIngredientRow;
+  })
+
+
   //increment row
   currentRows += 1; 
   childrenLength = tbody.children.length;
@@ -119,6 +161,32 @@ duplicate.onclick = function() {
     allInputsLastTr[i].value = allInputsSecondLastTr[i].value; 
   }
 }
+addProductToListButton.onclick = function(){
+  const myProductNameInput = document.getElementById('product-name');
+  const name = myProductNameInput.value;
+  productNames.push(name);
+  const mySelects = document.getElementsByTagName('select');
+  for(var i = 0; i < mySelects.length; i++){
+    
+      const currentOption = document.createElement('option');
+      const productNamesLength = productNames.length;
+      currentOption.value = productNames[productNamesLength - 1];
+      currentOption.textContent = productNames[productNamesLength - 1];
+      mySelects[i].appendChild(currentOption)
+    
+  }
+}
+
+function deleteProductRow(){
+  const li = this.parentElement;
+  li.outerHTML = '';
+}
+
+function deleteIngredientRow(){
+  const tr = this.parentElement.parentElement.parentElement;
+  tr.outerHTML = '';
+}
+
 const editButtons = document.getElementsByClassName('edit-button-recipe');
 Array.from(editButtons).forEach(button => {
   button.onclick = toggleInputDisabled;
@@ -129,3 +197,12 @@ Array.from(addButtonsRecipe).forEach(button => {
   button.onclick = addRecipeRow;
 })
 
+const deleteProductButtons = document.getElementsByClassName('btn-delete-product');
+Array.from(deleteProductButtons).forEach(button => {
+  button.onclick = deleteProductRow;
+})
+
+const deleteIngredientButtons = document.getElementsByClassName('delete-button-ingredient');
+Array.from(deleteIngredientButtons).forEach(button => {
+  button.onclick = deleteIngredientRow;
+})
