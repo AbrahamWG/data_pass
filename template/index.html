@@ -28,20 +28,20 @@
                 <option value="" disabled></option>
             </select>
         </div>
+        
+        <form id='data-table'>
+            <table class="table table-striped m-3">
+                <thead>
+                    <tr>
+                        <th>No.</th>
+                        <th>Ingredients</th>
+                        <th>Supply</th>
+                        <th>Price</th>
+                        <th>Recipe</th>
 
-        <table class="table table-striped m-3">
-            <thead>
-                <tr>
-                    <th>No.</th>
-                    <th>Ingredients</th>
-                    <th>Supply</th>
-                    <th>Price</th>
-                    <th>Recipe</th>
-
-                </tr>
-            </thead>
-            <tbody>
-                <form name="passdata" action="." method="POST">
+                    </tr>
+                </thead>
+                <tbody>
                     <!-- Insert data -->
                     <div class="data-rows">
                         <tr id='ingredient-1'>    
@@ -86,9 +86,9 @@
                             
                         </td>
                     </tr>
-                </form>
-            </tbody>
-        </table>
+                </tbody>
+            </table>
+        </form>
 
         <script src="{{url_for('static', filename='main.js')}}"/>
         <!-- Bootstrap -->

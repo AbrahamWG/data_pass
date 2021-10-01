@@ -1,7 +1,9 @@
 const dataRows = document.getElementsByClassName('data-rows');
 const addButton = document.getElementById('add-button');
 const duplicate = document.getElementById('dup-button');
-const addProductToListButton = document.getElementById('add-product-to-list-button')
+const addProductToListButton = document.getElementById('add-product-to-list-button');
+const dataTable = document.getElementById('data-table');
+
 let currentRows = 2;
 const productNames = [];
 
@@ -111,6 +113,13 @@ addButton.onclick = function(){
     button.onclick = deleteIngredientRow;
   })
 
+  const mySelect = this.parentElement.parentElement.previousElementSibling.previousElementSibling.querySelector('select');
+  for(var i  =0 ; i<  productNames.length; i++){
+    const currentOption = document.createElement('option');
+    currentOption.value = productNames[i];
+    currentOption.textContent = productNames[i];
+    mySelect.appendChild(currentOption);
+  }
 }
 
 
@@ -123,8 +132,9 @@ duplicate.onclick = function() {
   var template = tbody.children[childrenLength-3].outerHTML + '<tr id="empty-row"></tr>';
   // id kolom NO last row, misal ke5, row-number-5, ubah jadi row-number-5 id nya
   template = template.replace('row-number-' + (currentRows - 1), 'row-number-' + currentRows);
-  template = template.replace('ingredient-' + (currentRows - 1), 'ingredient-' + currentRows);
-  
+  // console.log(template);
+  template = template.replaceAll('ingredient-' + (currentRows - 1), 'ingredient-' + currentRows);
+  console.log(template);
   const currentEmptyRow = document.getElementById('empty-row');
   currentEmptyRow.outerHTML = template;
   console.log('row-number-' + currentRows)
@@ -206,3 +216,18 @@ const deleteIngredientButtons = document.getElementsByClassName('delete-button-i
 Array.from(deleteIngredientButtons).forEach(button => {
   button.onclick = deleteIngredientRow;
 })
+
+
+
+// ========= SEND DATA TO PYTHON ============
+
+dataTable.onsubmit = function(e){
+  const form = e.srcElement;
+  const fd = new FormData(form);
+  console.log(fd);
+  fetch('/', {
+    method: "POST",
+    body: fd
+  })
+  e.preventDefault();
+}
