@@ -24,16 +24,17 @@
         </form> -->
         <div class="container-fluid py-3 px-5 bg-dark text-white">
             <h1 class="display-5 fw-bold">Boba Optimization</h1>
-            <p class="col-md-8 fs-5">Boba Calculator to Optimize sales.</p>
+            <p class="col-md-8 fs-5">Boba Calculator to optimize sales by minimizing the amount of production cost.</p>
         </div>
-        <div style='padding-left: 10px'>
-            <h1 class="col-md-8 fs-bold text-lg-start" style="color:white; margin-top: 15px;">Ingredient and Recipe Table</h1>
-            <input type='text' id='product-name' placeholder='Enter product name' class='form-control' style='width: 250px; margin-top: 10px'/> 
-            <button type="button"  id='add-product-to-list-button' class="btn btn-primary" style='width: 250px; margin-top: 10px'>Add product recipe to list</button>
-            
-            <select style='display: block; width: 250px; margin-top: 10px; margin-bottom: 10px;'>
-                <option value="" disabled></option>
-            </select>
+        <div style='padding-left: 20px'>
+            <h1 class="col-md-8 fs-bold text-lg-start" style="color:white; margin-top: 15px; font-size: 36px">Ingredient and Recipe Table</h1>
+            <p style="color: white; font-size: 16px; ">Firstly, enter your boba variants in the "Enter product name" section and click "add  product recipe to list. After that, enter all the required information. On the recipe column, you can select the appropriate product and the amount of the ingredient it uses in the "product unit" section. If the product unit is in milliliters (ml), then the supply should also be milliliters (ml).<br>Eg. Milk Tea would use up 200 ml of milk. The ingredient would be milk, while the product is Milk Tea, and the product unit is 200.</p>
+                <input type='text' id='product-name' placeholder='Enter product name' class='form-control d-inline' style='width: 250px; margin-top: 10px'/> 
+                
+                <select style='display: inline; width: 250px; height: 35px; margin-top: 10px;'>
+                    <option value="" disabled></option>
+                </select>
+            <button type="button"  id='add-product-to-list-button' class="btn btn-primary d-block" style='width: 250px; margin-top: 10px; margin-bottom: 10px'>Add product recipe to list</button>
         </div>
         
         <form id='data-table'>
@@ -43,9 +44,9 @@
                     <tr>
                         <th>No.</th>
                         <th>Ingredients</th>
-                        <th>Supply</th>
+                        <th>Supply (weekly)</th>
                         <th>Price</th>
-                        <th>Recipe</th>
+                        <th>Product Recipe</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -76,7 +77,6 @@
                                     <button type="button" class="edit-button-recipe col-sm-4 btn btn-secondary mt-4">Toggle Edit</button>
                                     <br>
                                     <button type="button" class="delete-button-ingredient col-sm-4 btn btn-danger mt-2" style='width: 60%'>Delete Ingredient</button>
-
                                     <hr>
                                 </ol>
                             </td>
@@ -94,13 +94,15 @@
                 </tbody>
             </table>
             <table class="table table-bordered table-dark">
-                <h1 class="col-md-8 fs-bold" style="color:white; margin-top: 60px; padding-left: 10px;">Sales Requirement</h1>
+                <h1 class="col-md-8 fs-bold" style="color:white; font-size: 36px; margin-top: 60px; padding-left: 20px;">Sales Requirement</h1>
+                <p style="color: white; padding-left: 20px; font-size: 16px"> Enter the amount of demands for each product per week. The "minimum sales" and "maximum sales" are the percentages of the sales of one product out of all the total sales (can be arbitrary). <br>Eg. Milk Tea would at least take part a minimum of 20% or a maximum of 40% of all the sales.</p>
                 <thead>
                     <tr>
                         <th>No.</th>
                         <th>Product List</th>
-                        <th>Minimum Sales</th>
-                        <th>Maximum Sales</th>
+                        <th>Demands (per week)</th>
+                        <th>Minimum Sales (% - per week)</th>
+                        <th>Maximum Sales (% - per week)</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -117,6 +119,9 @@
                             </td>
                             <td>
                                 <input type='number' name='maximum[]'' placeholder='specify value...'/>
+                            </td>
+                            <td>
+                                <input type='number' name='demand[]'' placeholder='specify value...'/>
                             </td>
                         </tr>
                         

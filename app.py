@@ -31,10 +31,6 @@ def get_value():
         'Maximum' : request.form.getlist['maximum[]'],
     }
 
-    
-
-
-
 
     return '''<h1>The data value is: {}</h1>'''.format(data_inventory)
 

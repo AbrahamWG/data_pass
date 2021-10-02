@@ -77,14 +77,15 @@ addButton.onclick = function(){
         <ol>
             <li>
                 <select name='ingredientProductName[ingredient-${currentRows}]'>
+
                 </select>
                 <input class='col-sm-3' type='text' name='ingredientProductUnit[ingredient-${currentRows}]' placeholder='product unit...'/>
                 <button type='button' class='btn btn-danger btn-delete-product'>Delete</button>
-
             </li>
             <div id='empty-recipe-row'></div>
-            <button  type="button" class="add-button-recipe btn btn-primary">Add product</button>
-            <button type="button" class="edit-button-recipe col-sm-4 btn btn-secondary">Toggle Edit</button>
+            <button type="button" class="add-button-recipe btn btn-primary mt-4">Add product</button>
+            <button type="button" class="edit-button-recipe col-sm-4 btn btn-secondary mt-4">Toggle Edit</button>
+            <br>
             <button type="button" class="delete-button-ingredient col-sm-4 btn btn-danger mt-2" style='width: 60%'>Delete Ingredient</button>
             <hr>
         </ol>
@@ -235,6 +236,9 @@ addButtonScore.onclick = function(){
     <td>
         <input type='number' name='maximum[]'' placeholder='specify value...'/>
     </td>
+    <td>
+        <input type='number' name='demand[]'' placeholder='specify value...'/>
+    </td>
   </tr>
 
   <tr id='empty-row-score'></tr>
@@ -252,7 +256,6 @@ addButtonScore.onclick = function(){
   }
 
 }
-
 
 
 // ========= SEND DATA TO PYTHON ============
