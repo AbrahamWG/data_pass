@@ -3,8 +3,11 @@ const addButton = document.getElementById('add-button');
 const duplicate = document.getElementById('dup-button');
 const addProductToListButton = document.getElementById('add-product-to-list-button');
 const dataTable = document.getElementById('data-table');
+const scoreRows = document.getElementsByClassName('score-rows');
+const addButtonScore = document.getElementById('add-button-score');
 
 let currentRows = 2;
+let currentRowsScore =2;
 const productNames = [];
 
 function toggleInputDisabled(){
@@ -216,6 +219,39 @@ const deleteIngredientButtons = document.getElementsByClassName('delete-button-i
 Array.from(deleteIngredientButtons).forEach(button => {
   button.onclick = deleteIngredientRow;
 })
+
+addButtonScore.onclick = function(){ 
+  const template = `
+  <tr id='ingredient-score-${currentRowsScore}'>  
+    <td>${currentRowsScore}</td>  
+    <td>
+      <select name='ingredientProductName[ingredient-1]'>
+
+      </select>
+    </td>
+    <td>
+        <input type='number' name='minimum[]' placeholder='specify value...'/>
+    </td>
+    <td>
+        <input type='number' name='maximum[]'' placeholder='specify value...'/>
+    </td>
+  </tr>
+
+  <tr id='empty-row-score'></tr>
+  `;
+  currentRowsScore += 1;
+  const currentEmptyRowScore = document.getElementById('empty-row-score');
+  currentEmptyRowScore.outerHTML = template;
+
+  const mySelect = this.parentElement.parentElement.previousElementSibling.previousElementSibling.querySelector('select');
+  for(var i  =0 ; i<  productNames.length; i++){
+    const currentOption = document.createElement('option');
+    currentOption.value = productNames[i];
+    currentOption.textContent = productNames[i];
+    mySelect.appendChild(currentOption);
+  }
+
+}
 
 
 

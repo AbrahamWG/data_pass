@@ -8,6 +8,11 @@
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     </head>
     <body>
+        <style>
+            body {
+                background-color: rgba(18, 19, 25, 1);  
+            }
+        </style>
         <!-- <form name="passdata" action="." method="POST">
             <label>Ingredients</label> 
             <input type="text" name="Ingredients">
@@ -19,18 +24,21 @@
         </form> -->
         <div class="container-fluid py-3 px-5 bg-dark text-white">
             <h1 class="display-5 fw-bold">Boba Optimization</h1>
-            <p class="col-md-8 fs-4">Boba Calculator to Optimize sales.</p>
+            <p class="col-md-8 fs-5">Boba Calculator to Optimize sales.</p>
         </div>
         <div style='padding-left: 10px'>
-            <input type='text' id='product-name' placeholder='Enter product name' class='form-control' style='width: 250px; margin-top: 10px'/>
-            <button type="button" id='add-product-to-list-button' class="btn btn-primary" style='width: 250px; margin-top: 10px'>Add product to list</button>
-            <select style='display: block; width: 250px; margin-top: 10px'>
+            <h1 class="col-md-8 fs-bold text-lg-start" style="color:white; margin-top: 15px;">Ingredient and Recipe Table</h1>
+            <input type='text' id='product-name' placeholder='Enter product name' class='form-control' style='width: 250px; margin-top: 10px'/> 
+            <button type="button"  id='add-product-to-list-button' class="btn btn-primary" style='width: 250px; margin-top: 10px'>Add product recipe to list</button>
+            
+            <select style='display: block; width: 250px; margin-top: 10px; margin-bottom: 10px;'>
                 <option value="" disabled></option>
             </select>
         </div>
         
         <form id='data-table'>
-            <table class="table table-striped m-3">
+            
+            <table class="table table-bordered table-dark">
                 <thead>
                     <tr>
                         <th>No.</th>
@@ -38,7 +46,6 @@
                         <th>Supply</th>
                         <th>Price</th>
                         <th>Recipe</th>
-
                     </tr>
                 </thead>
                 <tbody>
@@ -61,7 +68,7 @@
                                         <select name='ingredientProductName[ingredient-1]'>
 
                                         </select>
-                                        <input class='col-sm-3' type='text' name='ingredient1ProductUnit[ingredient-1]' placeholder='product unit...'/>
+                                        <input class='col-sm-3' type='text' name='ingredientProductUnit[ingredient-1]' placeholder='product unit...'/>
                                         <button type='button' class='btn btn-danger btn-delete-product'>Delete</button>
                                     </li>
                                     <div id='empty-recipe-row'></div>
@@ -81,15 +88,54 @@
                     <tr>
                         <td colspan="2" class='text-center'>
                             <button id='add-button' type="button" class="btn btn-primary">Add row+</button>
-                            <button id='dup-button' type="button" class="btn btn-warning">Duplicate</button>
-                            <button id='cal-button' type="submit" class="btn btn-success">Calculate</button>
-                            
+                            <button id='dup-button' type="button" class="btn btn-warning">Duplicate</button>                            
                         </td>
                     </tr>
                 </tbody>
             </table>
-        </form>
+            <table class="table table-bordered table-dark">
+                <h1 class="col-md-8 fs-bold" style="color:white; margin-top: 60px; padding-left: 10px;">Sales Requirement</h1>
+                <thead>
+                    <tr>
+                        <th>No.</th>
+                        <th>Product List</th>
+                        <th>Minimum Sales</th>
+                        <th>Maximum Sales</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <div class="score_rows">
+                        <tr id='ingredient-score-1'>    
+                            <td id='row-1-score'>1</td>
+                            <td>
+                                <select name='ingredientProductName[ingredient-1]'>
 
+                                </select>
+                            </td>
+                            <td>
+                                <input type='number' name='minimum[]' placeholder='specify value...'/>
+                            </td>
+                            <td>
+                                <input type='number' name='maximum[]'' placeholder='specify value...'/>
+                            </td>
+                        </tr>
+                        
+                        <tr id='empty-row-score'></tr>
+
+                        <tr>
+                            <td colspan="2" class='text-center'>
+                                <button id='add-button-score' type="button" class="btn btn-primary">Add row+</button>
+                            </td>
+                        </tr>
+                    </div>
+                </tbody>
+            </table>
+
+            <div class="d-grid gap-2 col-4 mx-auto my-5" style="width: 1000px;">
+                <button class="btn btn-success" id='cal_button' type="submit">Calculate!</button>
+            </div>
+        </form>
+        
         <script src="{{url_for('static', filename='main.js')}}"/>
         <!-- Bootstrap -->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
