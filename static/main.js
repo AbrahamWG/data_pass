@@ -226,18 +226,18 @@ addButtonScore.onclick = function(){
   <tr id='ingredient-score-${currentRowsScore}'>  
     <td>${currentRowsScore}</td>  
     <td>
-      <select name='ingredientProductName[ingredient-1]'>
+      <select name='scoreListName[]'>
 
       </select>
     </td>
     <td>
-        <input type='number' name='minimum[]' placeholder='specify value...'/>
+        <input type='number' name='demand[]' placeholder='specify value...'/>
+    </td>
+    <td>
+        <input type='number' name='minimum[]'' placeholder='specify value...'/>
     </td>
     <td>
         <input type='number' name='maximum[]'' placeholder='specify value...'/>
-    </td>
-    <td>
-        <input type='number' name='demand[]'' placeholder='specify value...'/>
     </td>
   </tr>
 
@@ -259,14 +259,30 @@ addButtonScore.onclick = function(){
 
 
 // ========= SEND DATA TO PYTHON ============
-
 dataTable.onsubmit = function(e){
   const form = e.srcElement;
   const fd = new FormData(form);
-  console.log(fd);
+  fd.set('totalIngredientRows', currentRows);
   fetch('/', {
     method: "POST",
     body: fd
-  })
+  }).then(res => res.json())
+    .then(data => {
+      // data = data dictionary dari flask.
+      /*
+        {
+          'BobaA': 500,
+          
+        }
+      */
+      var template = "";
+
+      console.log(data);
+      const output = document.getElementById('output');
+      Object.entries(data).forEach(entry => {
+        template += '<li>' + entry[0] + ': ' + entry[1] + '</li>'
+      })
+      output.innerHTML = template;
+    })
   e.preventDefault();
 }

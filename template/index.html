@@ -110,18 +110,18 @@
                         <tr id='ingredient-score-1'>    
                             <td id='row-1-score'>1</td>
                             <td>
-                                <select name='ingredientProductName[ingredient-1]'>
+                                <select name='scoreListName[]'>
 
                                 </select>
                             </td>
                             <td>
-                                <input type='number' name='minimum[]' placeholder='specify value...'/>
+                                <input type='number' name='demand[]' placeholder='specify value...'/>
+                            </td>
+                            <td>
+                                <input type='number' name='minimum[]'' placeholder='specify value...'/>
                             </td>
                             <td>
                                 <input type='number' name='maximum[]'' placeholder='specify value...'/>
-                            </td>
-                            <td>
-                                <input type='number' name='demand[]'' placeholder='specify value...'/>
                             </td>
                         </tr>
                         
@@ -140,6 +140,12 @@
                 <button class="btn btn-success" id='cal_button' type="submit">Calculate!</button>
             </div>
         </form>
+
+        <h1 class="col-md-8 fs-bold" style="color:white; font-size: 36px; margin-top: 60px; padding-left: 20px;">Result</h1>
+        <ol id='output'>
+
+        </ol>
+
         
         <script src="{{url_for('static', filename='main.js')}}"/>
         <!-- Bootstrap -->
