@@ -1,3 +1,4 @@
+#Terminology: https://docs.google.com/document/d/1QFggZ8KRd4AHGsprd1xjd7-F5-7ZqMykGbkkwU6dMSY/edit?usp=sharing
 import numpy as np
 import pandas as pd
 from pandas.io.stata import StataMissingValue
