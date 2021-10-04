@@ -272,6 +272,7 @@ dataTable.onsubmit = function(e){
       /*
         {
           'BobaA': 500,
+          'BobaB' : 900,
           
         }
       */

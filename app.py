@@ -44,8 +44,6 @@ def get_value():
     productDictionaryNames = {}
     for i in range(len(allProductName)):
         productDictionaryNames[allProductName[i]] = 0
-    # allProductName: ['Bobaa', 'Bobaab']
-    # productDictionary: { 'Bobaa': 0, 'Bobaab': 0}
     print('===== DF RECIPE =====')
     print(df_recipe)
 
@@ -60,6 +58,13 @@ def get_value():
     
     # TODO: 
     result = calculate(df_recipe, df_inventory, df_score)
+
+    for i in range(len(allProductName)):
+        productDictionaryNames[i].update(result[i])
+
+    print(productDictionaryNames)
+
+
     # 
     # ubah value setiap key dari productDictionaryNames sesuai hasil calculate(result)
 
