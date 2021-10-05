@@ -19,10 +19,6 @@ def get_value():
     supplyList = request.form.getlist('supply[]')
     priceList = request.form.getlist('price[]')
     df_inventory = parseInputInventory(ingredientList, supplyList, priceList)
-    print('===== DF INVENTORY =====')
-    
-    print(df_inventory)
-
 
     #dapatkan semua ingredient product names dari setiap row yang tidak kosong
     ingredientProductNames = []
@@ -40,33 +36,25 @@ def get_value():
             ingredientProductUnits.append(currentProductUnit)
 
     df_recipe = parseInputRecipe(ingredientProductNames, ingredientProductUnits, totalIngredientRows)
-    allProductName = list(df_recipe) ## atau df.columns.values.tolist()
-    productDictionaryNames = {}
-    for i in range(len(allProductName)):
-        productDictionaryNames[allProductName[i]] = 0
-    print('===== DF RECIPE =====')
-    print(df_recipe)
 
     productScoreList = request.form.getlist('scoreListName[]')
     demandScoreList = request.form.getlist('demand[]')
     minSalesList = request.form.getlist('minimum[]')
     maxSalesList = request.form.getlist('maximum[]')
     
+    #dataframe score
     df_score = parseScoreInput(productScoreList, demandScoreList, minSalesList, maxSalesList);
-    print('==== DF SCORE ====')
-    print(df_score)
     
-    # TODO: 
-    result = calculate(df_recipe, df_inventory, df_score)
+    #mendapatkan values dari hasil lin_prog
+    result =  calculate(df_recipe, df_inventory, df_score)
+    status = result[0]
+    solution = result[1]
 
-    for i in range(len(allProductName)):
-        productDictionaryNames[i].update(result[i])
-
-    print(productDictionaryNames)
-
-
-    # 
-    # ubah value setiap key dari productDictionaryNames sesuai hasil calculate(result)
+    allProductName = list(df_recipe)
+    productDictionaryNames = {}
+    
+    for i in range(len(solution)):
+        productDictionaryNames[allProductName[i]] = solution[i]
 
     return jsonify(productDictionaryNames)
 

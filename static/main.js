@@ -128,7 +128,6 @@ addButton.onclick = function(){
 
 
 duplicate.onclick = function() {
-
   //dapatkan tbody
   const tbody = document.getElementsByTagName('tbody')[0];
   //dapatkan children row table terakhir, -3 karena index
@@ -257,7 +256,6 @@ addButtonScore.onclick = function(){
 
 }
 
-
 // ========= SEND DATA TO PYTHON ============
 dataTable.onsubmit = function(e){
   const form = e.srcElement;
@@ -268,14 +266,7 @@ dataTable.onsubmit = function(e){
     body: fd
   }).then(res => res.json())
     .then(data => {
-      // data = data dictionary dari flask.
-      /*
-        {
-          'BobaA': 500,
-          'BobaB' : 900,
-          
-        }
-      */
+
       var template = "";
 
       console.log(data);
