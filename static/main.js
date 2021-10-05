@@ -260,12 +260,15 @@ addButtonScore.onclick = function(){
 dataTable.onsubmit = function(e){
   const form = e.srcElement;
   const fd = new FormData(form);
+  const myStatus = document.getElementById('status');
   fd.set('totalIngredientRows', currentRows);
   fetch('/', {
     method: "POST",
     body: fd
   }).then(res => res.json())
     .then(data => {
+      myStatus.innerHTML = data.Status;
+      delete data.Status;
 
       var template = "";
 
@@ -275,6 +278,7 @@ dataTable.onsubmit = function(e){
         template += '<li>' + entry[0] + ': ' + entry[1] + '</li>'
       })
       output.innerHTML = template;
+      
     })
   e.preventDefault();
 }

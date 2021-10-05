@@ -53,6 +53,8 @@ def get_value():
     allProductName = list(df_recipe)
     productDictionaryNames = {}
     
+    productDictionaryNames['Status'] = status
+
     for i in range(len(solution)):
         productDictionaryNames[allProductName[i]] = solution[i]
 
